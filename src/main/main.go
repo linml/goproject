@@ -5,7 +5,12 @@ import (
 	"fmt"
 )
 
+func hello() {
+	fmt.Print("hello\n")
+}
+
 func main() {
-	emryshttplib.Testurl()
+	emryshttplib.T()
+	hello()
 	fmt.Print("aaaa")
 }

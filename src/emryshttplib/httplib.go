@@ -1,4 +1,5 @@
 package emryshttplib
+
 import (
 	"bytes"
 	"crypto/tls"
@@ -13,30 +14,33 @@ import (
 	"os"
 	"strings"
 	"time"
-   )
-   var defaultUserAgent="merlieServer";
+)
+
+var defaultUserAgent = "merlieServer"
+
 type EmrysHttpRequest struct {
-	url string
-	req *http.Request
-	params map[string]string
-	showdebug  bool
-	connectTimeout time.Duration
+	url              string
+	req              *http.Request
+	params           map[string]string
+	showdebug        bool
+	connectTimeout   time.Duration
 	readWriteTimeout time.Duration
-	tlsClientConfig *tls.Config
+	tlsClientConfig  *tls.Config
 }
- func Get(url string) *EmrysHttpRequest {
- 	var req http.Request
- 	req.Method="GET"
- 	req.Header=http.Header{}
- 	req.Header.Set("User-Agent",defaultUserAgent)
- 	return &EmrysHttpRequest{url, &req, map[string]string{}, false, 60*time.Second, 60*time.Second, nil}
- }
+
+func Get(url string) *EmrysHttpRequest {
+	var req http.Request
+	req.Method = "GET"
+	req.Header = http.Header{}
+	req.Header.Set("User-Agent", defaultUserAgent)
+	return &EmrysHttpRequest{url, &req, map[string]string{}, false, 60 * time.Second, 60 * time.Second, nil}
+}
 func Post(url string) *EmrysHttpRequest {
-	var req http.Request;
-	req.Method="POST"
-	req.Header=http.Header{}
-	req.Header.Set("User-Agent",defaultUserAgent)
-	return &EmrysHttpRequest{url,&req,map[string]string{},false,60*time.Second,60*time.Second,nil}
+	var req http.Request
+	req.Method = "POST"
+	req.Header = http.Header{}
+	req.Header.Set("User-Agent", defaultUserAgent)
+	return &EmrysHttpRequest{url, &req, map[string]string{}, false, 60 * time.Second, 60 * time.Second, nil}
 }
 func Put(url string) *EmrysHttpRequest {
 	var req http.Request
@@ -52,15 +56,14 @@ func Delete(url string) *EmrysHttpRequest {
 	req.Header = http.Header{}
 	req.Header.Set("User-Agent", defaultUserAgent)
 	return &EmrysHttpRequest{url, &req, map[string]string{}, false, 60 * time.Second, 60 * time.Second, nil}
-} 
- func Head(url string) *EmrysHttpRequest {
+}
+func Head(url string) *EmrysHttpRequest {
 	var req http.Request
 	req.Method = "HEAD"
 	req.Header = http.Header{}
 	req.Header.Set("User-Agent", defaultUserAgent)
 	return &EmrysHttpRequest{url, &req, map[string]string{}, false, 60 * time.Second, 60 * time.Second, nil}
-}  
-
+}
 
 func (b *EmrysHttpRequest) Debug(isdebug bool) *EmrysHttpRequest {
 	b.showdebug = isdebug
@@ -86,8 +89,7 @@ func (b *EmrysHttpRequest) Header(key, value string) *EmrysHttpRequest {
 func (b *EmrysHttpRequest) Param(key, value string) *EmrysHttpRequest {
 	b.params[key] = value
 	return b
-}   
-
+}
 
 func (b *EmrysHttpRequest) Body(data interface{}) *EmrysHttpRequest {
 	switch t := data.(type) {
