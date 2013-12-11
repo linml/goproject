@@ -1,11 +1,11 @@
 package main
 
 import (
-	"./emryshttplib"
+	"../emryshttplib"
 	"fmt"
 )
 
 func main() {
-	Testurl()
+	emryshttplib.Testurl()
 	fmt.Print("aaaa")
 }
